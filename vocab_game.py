@@ -197,4 +197,4 @@ st.write("🐟 Fish")
 st.write("🍑 Peach")
 st.write("🎈 Balloon")
 
-st.writest("นางสาวพัณณ์ชิตา จองทุน เลขที่ 17 ม.4/9")
+st.write("นางสาวพัณณ์ชิตา จองทุน เลขที่ 17 ม.4/9")
