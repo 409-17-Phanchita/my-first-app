@@ -2,7 +2,7 @@
 # 📌 ฟังก์ชัน MessageBox (Dialog)
 # --------------------------------------------------
 
-@st.dialog("📋 สรุปผลการเล่นเกม")
+st.dialog("📋 สรุปผลการเล่นเกม")
 def show_result_dialog():
 
     st.balloons()
