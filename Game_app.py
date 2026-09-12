@@ -34,7 +34,7 @@ if "score" not in st.session_state:
     
 # ฟังก์ชันเมื่อดล่นเกม
 
-def start_game():
+ def start_game():
 
     st.session_state.ans1_val = ""
     st.session_state.ans2_val = ""
