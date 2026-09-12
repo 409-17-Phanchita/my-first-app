@@ -101,7 +101,7 @@ if st.session_state.game_started and not st.session_state.game_finished:
 
     # คำนวณเวลาที่เหลือ
     elapsed_time = time.time() - st.session_state.start_time
-    time_left = 30 - int(elapsed_time)
+    time_left = 100 - int(elapsed_time)
 
     if time_left > 0:
 
