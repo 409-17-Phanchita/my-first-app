@@ -5,10 +5,7 @@ st.title("🧪 เกมทายตารางธาตุ")
 st.write("ทายชื่อธาตุจากสัญลักษณ์และเลขอะตอม")
 
 
-# ==================================================
 # 1. กำหนดค่าเริ่มต้นใน session_state ถ้ายังไม่มี
-# ==================================================
-
 if "ans1_val" not in st.session_state:
     st.session_state.ans1_val = ""
 
@@ -38,10 +35,10 @@ if "score" not in st.session_state:
 
 
 # ==================================================
-# 2. ฟังก์ชันเริ่มเกมใหม่
+# ฟังก์ชันเริ่มเกม
 # ==================================================
 
-def reset_game():
+def start_game():
 
     st.session_state.ans1_val = ""
     st.session_state.ans2_val = ""
@@ -49,28 +46,55 @@ def reset_game():
     st.session_state.ans4_val = ""
     st.session_state.ans5_val = ""
 
+    st.session_state.score = 0
     st.session_state.start_time = time.time()
 
     st.session_state.game_started = True
     st.session_state.game_finished = False
-    st.session_state.score = 0
 
     st.rerun()
 
 
 # ==================================================
-# 3. ปุ่มเกมใหม่
+# ฟังก์ชันเริ่มเกมใหม่
 # ==================================================
 
-if st.button("🔄 เกมใหม่"):
-    reset_game()
+def restart_game():
 
+    st.session_state.ans1_val = ""
+    st.session_state.ans2_val = ""
+    st.session_state.ans3_val = ""
+    st.session_state.ans4_val = ""
+    st.session_state.ans5_val = ""
 
-st.write("---")
+    st.session_state.score = 0
+    st.session_state.start_time = None
+
+    st.session_state.game_started = False
+    st.session_state.game_finished = False
+
+    st.rerun()
 
 
 # ==================================================
-# 4. เกม
+# ปุ่มเริ่มเกม / เริ่มใหม่
+# ==================================================
+
+if not st.session_state.game_started:
+
+    if not st.session_state.game_finished:
+
+        if st.button("▶️ เริ่มเกม"):
+            start_game()
+
+    else:
+
+        if st.button("🔄 เริ่มใหม่"):
+            restart_game()
+
+
+# ==================================================
+# เกม
 # ==================================================
 
 if st.session_state.game_started and not st.session_state.game_finished:
@@ -79,23 +103,15 @@ if st.session_state.game_started and not st.session_state.game_finished:
     elapsed_time = time.time() - st.session_state.start_time
     time_left = 30 - int(elapsed_time)
 
-    # --------------------------------------------------
-    # แสดงเวลานับถอยหลัง
-    # --------------------------------------------------
-
-    timer = st.empty()
-
     if time_left > 0:
 
-        timer.error(
-            f"⏳ เวลาที่เหลือ: {time_left} วินาที"
-        )
+        st.error(f"⏳ เวลาที่เหลือ: {time_left} วินาที")
 
     else:
 
-        timer.warning("⏰ หมดเวลา!")
+        st.warning("⏰ หมดเวลา!")
 
-        # หมดเวลาแล้วตรวจคำตอบอัตโนมัติ
+        # ตรวจคำตอบอัตโนมัติ
         u_ans1 = st.session_state.ans1_val.strip().lower()
         u_ans2 = st.session_state.ans2_val.strip().lower()
         u_ans3 = st.session_state.ans3_val.strip().lower()
@@ -122,19 +138,15 @@ if st.session_state.game_started and not st.session_state.game_finished:
         st.session_state.score = score
         st.session_state.game_finished = True
 
-        time.sleep(1)
         st.rerun()
 
 
     # ==================================================
-    # 5. ข้อ 1
+    # ข้อ 1
     # ==================================================
 
     st.subheader("ข้อ 1")
-
-    st.write(
-        "สัญลักษณ์ **Be** เลขอะตอม **4** คือธาตุอะไร?"
-    )
+    st.write("สัญลักษณ์ **Be** เลขอะตอม **4** คือธาตุอะไร?")
 
     ans1 = st.text_input(
         "คำตอบข้อ 1",
@@ -145,14 +157,11 @@ if st.session_state.game_started and not st.session_state.game_finished:
 
 
     # ==================================================
-    # 6. ข้อ 2
+    # ข้อ 2
     # ==================================================
 
     st.subheader("ข้อ 2")
-
-    st.write(
-        "สัญลักษณ์ **Ge** เลขอะตอม **32** คือธาตุอะไร?"
-    )
+    st.write("สัญลักษณ์ **Ge** เลขอะตอม **32** คือธาตุอะไร?")
 
     ans2 = st.text_input(
         "คำตอบข้อ 2",
@@ -163,14 +172,11 @@ if st.session_state.game_started and not st.session_state.game_finished:
 
 
     # ==================================================
-    # 7. ข้อ 3
+    # ข้อ 3
     # ==================================================
 
     st.subheader("ข้อ 3")
-
-    st.write(
-        "สัญลักษณ์ **Eu** เลขอะตอม **63** คือธาตุอะไร?"
-    )
+    st.write("สัญลักษณ์ **Eu** เลขอะตอม **63** คือธาตุอะไร?")
 
     ans3 = st.text_input(
         "คำตอบข้อ 3",
@@ -181,14 +187,11 @@ if st.session_state.game_started and not st.session_state.game_finished:
 
 
     # ==================================================
-    # 8. ข้อ 4
+    # ข้อ 4
     # ==================================================
 
     st.subheader("ข้อ 4")
-
-    st.write(
-        "สัญลักษณ์ **W** เลขอะตอม **74** คือธาตุอะไร?"
-    )
+    st.write("สัญลักษณ์ **W** เลขอะตอม **74** คือธาตุอะไร?")
 
     ans4 = st.text_input(
         "คำตอบข้อ 4",
@@ -199,14 +202,11 @@ if st.session_state.game_started and not st.session_state.game_finished:
 
 
     # ==================================================
-    # 9. ข้อ 5
+    # ข้อ 5
     # ==================================================
 
     st.subheader("ข้อ 5")
-
-    st.write(
-        "สัญลักษณ์ **Fm** เลขอะตอม **100** คือธาตุอะไร?"
-    )
+    st.write("สัญลักษณ์ **Fm** เลขอะตอม **100** คือธาตุอะไร?")
 
     ans5 = st.text_input(
         "คำตอบข้อ 5",
@@ -220,7 +220,7 @@ if st.session_state.game_started and not st.session_state.game_finished:
 
 
     # ==================================================
-    # 10. ปุ่มตรวจคำตอบ
+    # ปุ่มตรวจคำตอบ
     # ==================================================
 
     if st.button("✅ ตรวจคำตอบ"):
@@ -257,7 +257,7 @@ if st.session_state.game_started and not st.session_state.game_finished:
 
 
 # ==================================================
-# 11. แสดงผลคะแนนเมื่อจบเกม
+# แสดงผลเมื่อจบเกม
 # ==================================================
 
 if st.session_state.game_finished:
@@ -266,7 +266,13 @@ if st.session_state.game_finished:
 
     st.write("---")
 
-    # แสดงผลคะแนน
+    st.write(f"### คะแนนของคุณ: {score} / 5")
+
+
+    # ==================================================
+    # เกณฑ์ประเมินผู้เล่น
+    # ==================================================
+
     if score == 5:
 
         st.success(
@@ -304,11 +310,8 @@ if st.session_state.game_finished:
         )
 
 
-    st.write(f"### คะแนนของคุณ: {score} / 5")
-
-
     # ==================================================
-    # 12. แสดงเฉลย
+    # แสดงเฉลย
     # ==================================================
 
     st.write("### 📖 เฉลย")
@@ -318,3 +321,11 @@ if st.session_state.game_finished:
     st.write("3. Eu = ยูโรเพียม (Europium)")
     st.write("4. W = ทังสเตน (Tungsten)")
     st.write("5. Fm = เฟอร์เมียม (Fermium)")
+
+
+    # ==================================================
+    # ปุ่มเริ่มใหม่หลังจบเกม
+    # ==================================================
+
+    if st.button("🔄 เริ่มใหม่"):
+        restart_game()
