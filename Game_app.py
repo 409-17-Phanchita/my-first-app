@@ -79,7 +79,7 @@ if not st.session_state.game_started:
     if not st.session_state.game_finished:
 
         if st.button("▶️ เริ่มเกม"):
-           start_game()
+           reset_game()
 
     else:
 
